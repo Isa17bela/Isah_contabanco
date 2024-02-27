@@ -1,0 +1,72 @@
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class Contabanco {
+    import Bundle;
+import View;
+import Button;
+import EditText;
+import TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+    public class MainActivity extends AppCompatActivity implements MainActivity {
+        private double saldo;
+
+        {
+            saldo = 0.0;
+        }
+
+        private TextView saldoTextView;
+        private EditText valorEditText;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            saldoTextView = findViewById(R.id.saldoTextView);
+            valorEditText = findViewById(R.id.valorEditText);
+            Button depositarButton = findViewById(R.id.depositarButton);
+            Button sacarButton = findViewById(R.id.sacarButton);
+
+            depositarButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    depositar();
+                }
+            });
+
+            sacarButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sacar();
+                }
+            });
+        }
+
+        private void depositar() {
+            double valor = Double.parseDouble(valorEditText.getText().toString());
+            saldo += valor;
+            atualizarSaldo();
+        }
+
+        private void sacar() {
+            double valor = Double.parseDouble(valorEditText.getText().toString());
+            if (valor <= saldo) {
+                saldo -= valor;
+                atualizarSaldo();
+            } else {
+               
+            }
+        }
+
+        private void atualizarSaldo() {
+            saldoTextView.setText("Saldo: R$ " + saldo);
+        }
+    }
+
+}
